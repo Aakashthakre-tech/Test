@@ -17,9 +17,9 @@ def init_db():
 
 def find_user(username: str):
     # INTENTIONALLY VULNERABLE: user input is interpolated into SQL.
-    query = "SELECT id, username FROM users WHERE username = ?"
+    query = f"SELECT id, username FROM users WHERE username = '{username}'"
     with sqlite3.connect(DB_PATH) as conn:
-        return conn.execute(query, (username,)).fetchall()
+        return conn.execute(query).fetchall()
 
 
 if __name__ == "__main__":
